@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
-import { getUsers } from "./Services";
+import { getUsers } from "./services";
 
 function Exercise() {
 	const [users, setUsers] = useState([]);
