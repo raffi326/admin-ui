@@ -1,9 +1,10 @@
-﻿import "./App.css";
+import "./App.css";
 import SignInPage from "./pages/signIn";
 import SignUpPage from "./pages/signUp";
 import ErrorPage from "./pages/error";
 import DashboardPage from "./pages/dashboard";
 import BalancePage from "./pages/balance";
+import ExpensePage from "./pages/expense";
 import {
   createBrowserRouter,
   Navigate,
@@ -14,7 +15,6 @@ import { AuthContext } from "./context/authContext.jsx";
       
 function App() {
   const { user } = useContext(AuthContext);
-
   const RequireAuth = ({ children }) => {
     return user ? children : <Navigate to="/login" />;
   };
@@ -57,13 +57,19 @@ function App() {
         </RequireAuth>
       ),
     },
+    {
+      path: "/expense",
+      element: (
+        <RequireAuth>
+          <ExpensePage />
+        </RequireAuth>
+      ),
+    },
   ]);
-
   return (
     <>
       <RouterProvider router={myRouter} />
     </>
   );
 }
-
 export default App;

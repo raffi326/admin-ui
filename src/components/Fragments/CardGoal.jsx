@@ -3,18 +3,24 @@ import Card from "../Elements/Card";
 import Icon from "../Elements/Icon";
 import CompositionExample from "../Elements/CompositionExample";
 import CircularProgress from '@mui/material/CircularProgress';
-
 function CardGoal(props) {
-  const { data } = props;
-
-  const chartValue = (data.present_amount / data.target_amount) * 100;
+  const { data, isLoading = false } = props;
   
-  const chartData = (
+  // Only calculate if data exists
+  let targetAmount, presentAmount, chartValue;
+  if (data) {
+    // Support both snake_case (API) and camelCase (sample data)
+    targetAmount = data.target_amount || data.targetAmount;
+    presentAmount = data.present_amount || data.presentAmount;
+    chartValue = (presentAmount / targetAmount) * 100;
+  }
+  
+  const chartData = data && (
     <div className="p-2">
             <div className="flex justify-between items-center">
               <div className="flex">
                 <span className="text-2xl font-bold me-4">
-                  ${data.target_amount}
+                  ${targetAmount}
                 </span>
                 <div className="p-2 bg-gray-05 text-gray-01 rounded-md box-border">
                   <Icon.Edit size={16} />
@@ -30,7 +36,7 @@ function CardGoal(props) {
                   <div className="ms-2">
                     <div>Target Achieved</div>
                     <div className="font-bold text-xl text-black">
-                      ${data.present_amount}
+                      ${presentAmount}
                     </div>
                   </div>
                 </div>
@@ -39,7 +45,7 @@ function CardGoal(props) {
                   <div className="ms-2">
                     <div>This Month Target</div>
                     <div className="font-bold text-xl text-black">
-                      ${data.target_amount}
+                      ${targetAmount}
                     </div>
                   </div>
                 </div>
@@ -56,12 +62,11 @@ function CardGoal(props) {
             </div>
           </div>
   );
-
   return (
     <>
       <Card title="Goals" 
       				desc={
-          Object.keys(data).length === 0 ? (
+          isLoading || !data || Object.keys(data).length === 0 ? (
 	          	<div className="flex flex-col justify-center items-center h-full text-primary">
               <CircularProgress color="inherit" size={50} enableTrackSlot />
               Loading Data
@@ -74,5 +79,4 @@ function CardGoal(props) {
     </>
   );
 }
-
 export default CardGoal;

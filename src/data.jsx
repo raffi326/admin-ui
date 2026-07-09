@@ -1,5 +1,4 @@
 import Icon from "./components/Elements/Icon";
-
 export const bills = [
   {
     id: 1,
@@ -24,7 +23,6 @@ export const bills = [
     amount: 559,
   },
 ];
-
 export const expensesBreakdowns = [
   {
     id: 1,
@@ -103,7 +101,6 @@ export const expensesBreakdowns = [
     ),
   },
 ];
-
 export const expensesStatistics = {
   dataKey: "date",
   series: [
@@ -155,7 +152,6 @@ export const expensesStatistics = {
     },
   ],
 };
-
 export const transactions = [
   {
     id: 1,
@@ -246,7 +242,6 @@ export const transactions = [
     icon: <Icon.Other />,
   },
 ];
-
 export const balances = [
   {
     id: 1,
@@ -294,7 +289,6 @@ export const balances = [
     logo: "",
   },
 ];
-
 export const goals = {
   id: 1,
   targetAmount: 20000,

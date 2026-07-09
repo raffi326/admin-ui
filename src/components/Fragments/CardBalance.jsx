@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "../Elements/Card";
 import DotsMobileStepper from "../Elements/DotsMobileStepper";
 import { Link } from "react-router-dom";
 import Icon from "../Elements/Icon";
-
+import { ThemeContext } from "../../context/themeContext";
 function CardBalance(props) {
   const { data } = props;
-
+  const { isDarkMode } = useContext(ThemeContext);
   return (
     <>
       <Card
@@ -16,18 +16,20 @@ function CardBalance(props) {
             data={data.map((item) => (
               <div key={item.id} className="p-2">
                 <div className="flex justify-between">
-                  <div className="text-2xl font-bold">${item.balance}</div>
+                  <div className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>${item.balance}</div>
                   <div>
-                    <Link to="/balance">All account</Link>
+                    <Link to="/balance" className={isDarkMode ? 'text-gray-300' : ''}>All account</Link>
                   </div>
                 </div>
                 <div className="border-b-1 border-gray-05 my-4"></div>
                 <div className="flex justify-between bg-primary text-white p-4 rounded-md">
                   <div>
                     Account Type
-                    <br />
+                    
+
                     <span className="text-xl font-bold">{item.accountType}</span>
-                    <br />
+                    
+
                     {item.accountNumber}
                   </div>
                   <div className="flex flex-col justify-between">
@@ -50,5 +52,4 @@ function CardBalance(props) {
     </>
   );
 }
-
 export default CardBalance;
